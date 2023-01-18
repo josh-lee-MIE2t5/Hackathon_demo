@@ -6,5 +6,5 @@ for i in range(10):
     #can we kick beliz out of the group?
 
 while(1):
-    print("Fuck you")
+    print("siktir git")
 
