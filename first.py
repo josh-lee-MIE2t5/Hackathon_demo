@@ -5,6 +5,6 @@ for i in range(10):
 
     #can we kick beliz out of the group?
 
-for i in range(0,5,2):
-    print("Andrew is a loser")
-    
+while(1):
+    print("Fuck you")
+
