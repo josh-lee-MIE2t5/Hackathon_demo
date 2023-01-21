@@ -10,15 +10,15 @@ headers = {
 r = requests.get('https://seatgeek.com/cities/toronto')
 soup = BeautifulSoup(r.content, 'lxml')
 
-i = 0
-
 eventLinks = []
-tabContent = soup.find_all('li', class_="presenters__ItemWrapper-sc-e3f40ed6-2 jNUXfT")
+tabContent = soup.find_all('div', class_="small-card-mobile")
 for item in tabContent:
     for link in item.find_all('a', href=True):
         eventLinks.append(baseurl + link['href'])
 
 print(eventLinks)
+
+
 
 # "title": "event 2",
 #    "description": "death",
