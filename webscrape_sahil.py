@@ -10,6 +10,6 @@ headers = {
 r = requests.get('https://www.toronto.ca/explore-enjoy/festivals-events/festivals-events-calendar/')
 soup = BeautifulSoup(r.content, 'lxml')
 
-eventsList = soup.find_all('div', class_="row")
+eventsList = soup.find_all('div', class_="row event-list-row")
 
 print(eventsList)
