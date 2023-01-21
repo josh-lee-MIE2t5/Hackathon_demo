@@ -57,8 +57,11 @@ for i in range(0,3):
         json_events.append(event)
 
 
-print(json.dumps(json_events))
+for item in json.dumps(json_events)
+    #perform API call to post
 
+
+# format of JSON object string
 # "title": "event 2", DONE
 #    "description": "death", NONE
 #    "location": "my hall", DONE
