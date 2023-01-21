@@ -1,0 +1,57 @@
+import requests
+from datetime import datetime
+from bs4 import BeautifulSoup
+
+baseurl = 'https://seatgeek.com/'
+
+headers = {
+    'User-Agent': 'https://developers.whatismybrowser.com/useragents/parse/?analyse-my-user-agent=yes'
+}
+
+r = requests.get('https://seatgeek.com/cities/toronto/concerts')
+soup = BeautifulSoup(r.content, 'lxml')
+
+eventLinks = []
+tabContent = soup.find_all('li', class_="EventItem__Item-sc-fc6da3d7-5 lnSRzA EventItem-sc-fc6da3d7-17 jLhmjK")
+for item in tabContent:
+    for link in item.find_all('a', href=True):
+        eventLinks.append(baseurl + link['href'])
+
+
+
+for link in eventLinks:
+    r = requests.get(link, headers = headers)
+    soup = BeautifulSoup(r.content, 'lxml')
+
+    title = soup.find('h1', class_="Typography__Text3-sc-85d68a85-8 cJjfGt").text
+    description = None
+    endDate = None
+    frequency = "once"
+    regRequirement = "true"
+    time_place = soup.find('p', class_="Typography__Terms-sc-85d68a85-11 dmmyTQ").text.strip().split("·")
+    at_index = time_place[0].rfind("at")
+
+    startDate = (datetime.strptime((time_place[0][0:at_index] + time_place[0][at_index+2::]).strip(), "%a %b %d  %I:%M%p")) #takes date/time from website -> converts to proper form
+    startDate = startDate.replace(year=2023)
+
+    event = {
+        'title': title + "'s Concert",
+        'description': description,
+        'location': time_place[1],
+        'startDate': startDate,
+        'endDate': endDate,
+        "registrationReq": regRequirement,
+        "frequency": frequency
+    }
+
+    print(event)
+
+
+# "title": "event 2", DONE
+#    "description": "death", NONE
+#    "location": "my hall", DONE
+#    "_type": "competition", DONE
+#    "startDate": "2023-01-21", DONE
+#    "endDate": "2023-01-25", NONE
+#    "registrationReq": false, DONE
+#    "frequency": "yearly"''' + toParse, NONE
