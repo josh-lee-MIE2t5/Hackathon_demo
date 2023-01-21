@@ -1,23 +1,21 @@
 import requests
 from bs4 import BeautifulSoup
 
-baseurl = 'https://www.destinationtoronto.com/'
+baseurl = 'https://seatgeek.com/'
 
 headers = {
     'User-Agent': 'https://developers.whatismybrowser.com/useragents/parse/?analyse-my-user-agent=yes'
 }
 
-r = requests.get('https://www.destinationtoronto.com/events/?view=list&sort=date&bounds=false')
+r = requests.get('https://seatgeek.com/cities/toronto')
 soup = BeautifulSoup(r.content, 'lxml')
 
 i = 0
 
-tabContent = soup.find_all('div', class_="root-panel panel-page")
-print(tabContent)
+eventLinks = []
+tabContent = soup.find_all('li', class_="presenters__ItemWrapper-sc-e3f40ed6-2 jNUXfT")
+for item in tabContent:
+    for link in item.find_all('a', href=True):
+        eventLinks.append(baseurl + link['href'])
 
-# eventsList = soup.find_all('div', class_="row event-list-row", recursive= False)
-# print(event)
-# print(eventNew)
-# for item in eventsList:
-#      for display in item.find_all('div', id_="fecListDisplay"):
-#         print(display)
+print(eventLinks)
