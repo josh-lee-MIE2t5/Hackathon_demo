@@ -19,3 +19,12 @@ for item in tabContent:
         eventLinks.append(baseurl + link['href'])
 
 print(eventLinks)
+
+# "title": "event 2",
+#    "description": "death",
+#    "location": "my hall",
+#    "_type": "competition",
+#    "startDate": "2023-01-21",
+#    "endDate": "2023-01-25",
+#    "registrationReq": false,
+#    "frequency": "yearly"''' + toParse,
