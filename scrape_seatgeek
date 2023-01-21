@@ -57,7 +57,7 @@ for i in range(0,3):
         json_events.append(event)
 
 
-for item in json.dumps(json_events)
+for item in json.dumps(json_events):
     #perform API call to post
 
 
